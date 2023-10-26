@@ -2,7 +2,7 @@ import { ChatHandler } from "../chat/ChatHandler.js";
 import Message from "../network/Message.js";
 import { ClientPlayerMessageHandler } from "../network/ClientPlayerMessageHandler.js";
 import { Renderer } from "../render/Renderer.js";
-import { Util } from "../util/Util.js";
+import { NetworkTypes } from "../util/Util.js";
 import { LATEST_SERVER_VERSION } from "../main.js";
 import { AdHandler } from "../network/AdHandler.js";
 import { Logger } from "../util/Logger.js";
@@ -67,7 +67,7 @@ class SplatshooterClient
                 if (!this.messageHandler) this.startServerHandshake("ws://localhost:6479");
                 else
                 {
-                    let loginPacket = new Message(Util.ServerboundMessageTypes.LOGIN, { username: usernameValue, version: LATEST_SERVER_VERSION });
+                    let loginPacket = new Message(NetworkTypes.ServerboundMessageTypes.LOGIN, { username: usernameValue, version: LATEST_SERVER_VERSION });
                     this.messageHandler.send(loginPacket);
                 }
             }
@@ -92,7 +92,7 @@ class SplatshooterClient
         this.messageHandler.socket.addEventListener("open", () =>
         {
             this.messageHandler.registerSocketHandlers();
-            this.messageHandler.send(new Message(Util.ServerboundMessageTypes.HANDSHAKE, { intent: "login" }));
+            this.messageHandler.send(new Message(NetworkTypes.ServerboundMessageTypes.HANDSHAKE, { intent: "login" }));
         });
     }
 

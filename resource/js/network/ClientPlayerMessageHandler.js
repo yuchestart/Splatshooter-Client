@@ -2,7 +2,7 @@ import { ChatHandler } from "../chat/ChatHandler.js";
 import { SplatshooterClient } from "../client/SplatshooterClient.js";
 import { LATEST_SERVER_VERSION } from "../main.js";
 import { loadModalHide } from "../ui/htmlgui.js";
-import { Util } from "../util/Util.js";
+import { NetworkTypes } from "../util/Util.js";
 import Message from "./Message.js";
 
 class ClientPlayerMessageHandler
@@ -49,7 +49,7 @@ class ClientPlayerMessageHandler
      */
     onKeepAlive(keepAliveMessage)
     {
-        this.send(new Message(Util.ServerboundMessageTypes.KEEPALIVE, { id: keepAliveMessage.id }));
+        this.send(new Message(NetworkTypes.ServerboundMessageTypes.KEEPALIVE, { id: keepAliveMessage.id }));
     }
 
     onChat(chatMessage)
@@ -87,19 +87,19 @@ class ClientPlayerMessageHandler
                 console.log(uncompressed);
                 switch (uncompressed.dataType)
                 {
-                    case Util.ClientboundMessageTypes.ERROR:
+                    case NetworkTypes.ClientboundMessageTypes.ERROR:
                         console.error("Error %d", uncompressed.data.code);
                         break;
-                    case Util.ClientboundMessageTypes.HANDSHAKE:
+                    case NetworkTypes.ClientboundMessageTypes.HANDSHAKE:
                         this.onHandshake(uncompressed.data);
                         break;
-                    case Util.ClientboundMessageTypes.LOGIN:
+                    case NetworkTypes.ClientboundMessageTypes.LOGIN:
                         this.onLogin(uncompressed.data);
                         break;
-                    case Util.ClientboundMessageTypes.KEEPALIVE:
+                    case NetworkTypes.ClientboundMessageTypes.KEEPALIVE:
                         this.onKeepAlive(uncompressed.data);
                         break;
-                    case Util.ClientboundMessageTypes.CHAT:
+                    case NetworkTypes.ClientboundMessageTypes.CHAT:
                         this.onChat(uncompressed.data);
                         break;
                     default:

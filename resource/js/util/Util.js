@@ -1,6 +1,6 @@
-export { Util };
+export { NetworkTypes };
 
-class Util
+class NetworkTypes
 {
     static ServerboundMessageTypes = {
         ERROR: -1,
@@ -22,5 +22,4 @@ class Util
         CHAT: 7,
         HEALTHUPDATE: 8
     };
-
 }

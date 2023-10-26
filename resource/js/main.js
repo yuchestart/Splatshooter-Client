@@ -1,4 +1,4 @@
-import { NetworkTypes } from "../../../shared/CommonTypes.js";
+import { NetworkTypes } from "./util/Util.js";
 import { SplatshooterClient } from "./client/SplatshooterClient.js";
 import Message from "./network/Message.js";
 
@@ -30,7 +30,7 @@ function main()
 }
 window.onload = main;
 
-sendChatMessage = function (textToSend)
+window.sendChatMessage = function (textToSend)
 {
   CLIENT.messageHandler.send(
     new Message(NetworkTypes.ServerboundMessageTypes.CHAT, { to: null, text: textToSend })
